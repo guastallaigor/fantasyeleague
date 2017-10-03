@@ -1,0 +1,205 @@
+<style>
+    .table-hover tbody tr:hover td,
+    .table-hover tbody tr:hover th {
+        background-color: #ffcc66;
+    }
+
+    .maozinha {
+        cursor: pointer;
+    }
+
+    .p30 {
+        padding: 30px;
+    }
+
+    .m20 {
+        margin: 20px 20px 20px 20px;
+    }
+
+    .fs18 {
+        font-size: 18px;
+    }
+
+    .lcase {
+        text-transform: lowercase;
+    }
+
+    .equipe {
+        display: inline-block;
+        padding: 7px;
+    }
+
+    .mb20 {
+        margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 767px) {
+        .hide767 {
+            display: none;
+        }
+    }
+
+    .danger {
+        border-color: #d43f3a;
+        background-color: #d43f3a;
+        color: #ffffff;
+    }
+
+    .danger:hover {
+        border-color: #FF9480;
+        background-color: #FF9480;
+        color: #ffffff;
+    }
+
+    .convidar {
+        border-color: #337ab7;
+        background-color: #337ab7;
+        color: #ffffff;
+    }
+
+    .convidar:hover {
+        border-color: #68B3C8;
+        background-color: #68B3C8;
+        color: #ffffff;
+    }
+
+    .btn-voltar {
+        background-color: #68B3C8;
+        border-color: #68B3C8;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .btn-voltar:hover {
+        background-color: #2C87EE;
+        border-color: #2C87EE;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .btn-back-green {
+        background-color: #7AC29A;
+        border-color: #7AC29A;
+        color: #ffffff;
+    }
+
+    .btn-back-green:hover {
+        background-color: #31C460;
+        border-color: #31C460;
+        color: #ffffff;
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <a class="btn btn-voltar" ui-sref="layout.perfil">Voltar</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card card-user">
+            <div class="image">
+                <img src="assets/images/background.jpeg" alt="..." />
+            </div>
+            <div class="content">
+                <div class="author">
+                    <div>
+                        <img class="avatar border-white" ng-src="{{vm.perfilvisitado.imagem}}" ng-click="vm.uploadImagem()" alt="..." />
+                        <h4 class="title">{{vm.perfilvisitado.nome}}<br/>
+                            <a ui-sref="layout.perfil-usuario">
+                                <small class="lcase">@{{vm.perfilvisitado.apelido}}</small>
+                            </a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2" ng-repeat="insignia in vm.insigniasperfilvisitado">
+                        <div class="card text-center">
+                            <img class="insignia" ng-src="{{insignia.imagem}}">
+                            <br>
+                            <label>{{insignia.texto}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" ng-click="vm.levelexp()">
+                        <h5><b>{{vm.perfilvisitado.level}}</b><br/>
+                            <small>{{vm.perfilvisitado.experiencia}} XP</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h5>Ligas Ativas<br/>
+                            <small>{{vm.perfilvisitado.ligas}}</small>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="text-center">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <button type="button" ng-click="vm.denunciar()" class="btn btn-block danger"><i class="ti-alert"> Denunciar jogador</i></button><br/>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <button type="button" ng-click="vm.convidarLiga()" class="btn btn-block convidar"><i class="ti-email"> Convidar para sua liga</i></button><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card" name="timePerfil">
+            <div class="header">
+                <h4 class="title equipe" ng-show="!vm.existe(vm.timeperfilvisitado.nome)">Equipe:
+                    <span class="mb20">
+                      <b>{{vm.timeperfilvisitado.nome}}</b>
+                    </span>
+                </h4>
+
+                <div ng-show="!vm.existe(vm.buscarTime.nome)" class="ng-hide" style="display: inline-block;float:right">
+                    <div>
+                        <button type="button" ui-sref="layout.equipeamadora" class="btn btn-back-green btn-xs">DETALHES</button>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="!vm.existe(vm.timeperfilvisitado.nome)" class="content ng-hide">
+                <table class="table table-striped maozinha table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th><b>Usuário</b></th>
+                            <th><b>Nível</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="time in vm.timeperfilvisitado.membros track by time.id" ui-sref="layout.perfil-usuario">
+                            <td>
+                                <div class="avatar hide767">
+                                    <img ng-src="{{time.imagem}}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                                </div>
+                            </td>
+                            <td>{{time.nome}}</td>
+                            <td>{{time.level}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-show="vm.existe(vm.timeperfilvisitado.nome)" class="content ng-hide p30">
+                <div class="text-center">
+                    <p class="fs18">Usuário não participa de nenhuma equipe.</p>
+                    <button type="button" ng-click="vm.convidarEquipe()" class="btn btn-lg convidar"><i class="ti-email"> Convidar para sua equipe</i></button><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<style>
+    .paddiv {
+        padding: 20px;
+        padding-bottom: 60px;
+    }
+
+    .bord {
+        border: 1px solid lightgray;
+    }
+
+    .msg {
+        height: 150px;
+        border: 1px solid lightgray;
+    }
+
+    .fright {
+        float: right;
+    }
+
+    .fsize18 {
+        font-size: 18px;
+    }
+
+    .fsize16 {
+        font-size: 16px;
+    }
+
+    .btn-back {
+        background-color: #68B3C8;
+        border-color: #68B3C8;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .btn-back:hover {
+        background-color: #2C87EE;
+        border-color: #2C87EE;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sx-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card content paddiv">
+            <form name="suporte">
+                <div class="form-group">
+                    <h5><b>Assunto:</b></h5>
+                    <select class="form-control well bord fsize18" id="sel1" name="sel1" ng-model="vm.suporte.categoria">
+                        <option value="0" selected>Escolha uma categoria</option>
+                        <option value="1">Suporte</option>
+                        <option value="2">Sugestão</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <h5><b>Mensagem:</b></h5>
+                    <textarea class="form-control msg fsize16" rows="5" id="comment" ng-model="vm.suporte.mensagem" placeholder="Mensagem" maxlength="944" required minlength="20"></textarea>
+                </div>
+            </form>
+            <div class="text-center">
+                <button type="button" class="btn btn-back btn-lg" ng-click="vm.enviarMensagem()" ng-disabled="suporte.$invalid">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>

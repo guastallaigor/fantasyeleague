@@ -1,0 +1,107 @@
+<div class="wrapper">
+    <div class="hidden menu" data-background-color="black" data-active-color="danger">
+        <div class="menu-wrapper">
+            <span class="menu-action-close" ng-click="vm.actionOfToggler()">
+        <i class="menu-icon ti-arrow-left" title="Menu"></i>
+        <span class="menu-title">Fechar menu</span>
+            </span>
+
+            <ul class="nav">
+              <li>
+                <a class="menu-item" ng-click="vm.actionToClose()" ui-sref="layout.dashboard">
+                  <i class="menu-icon ti-panel" title="Dashboard"></i>
+                  <span class="menu-title">Dashboard</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="menu-item" ng-click="vm.actionToClose()" ui-sref="layout.perfil">
+                  <i class="menu-icon ti-user" title="Perfil"></i>
+                  <span class="menu-title">Perfil</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="menu-item" ng-click="vm.actionToClose()" ui-sref="layout.ligas">
+                  <i class="menu-icon ti-view-list-alt" title="Ligas"></i>
+                  <span class="menu-title">Ligas</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="menu-item" ng-click="vm.actionToClose()" ui-sref="layout.escalacao">
+                  <i class="menu-icon ti-clipboard" title="Escalação"></i>
+                  <span class="menu-title">Escalação</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="menu-item" ng-click="vm.actionToClose()" ui-sref="layout.faq">
+                  <i class="menu-icon ti-help-alt" title="FAQ"></i>
+                  <span class="menu-title">FAQ</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="menu-item" ng-click="vm.actionToClose()" ui-sref="layout.suporte">
+                  <i class="menu-icon ti-headphone-alt" title="Suporte"></i>
+                  <span class="menu-title">Suporte</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="menu-item" ng-show="vm.usuarioPossuiAdmin" ng-click="vm.actionToClose()" ui-sref="layout.adm">
+                  <i class="menu-icon ti-crown" title="Adm"></i>
+                  <span class="menu-title">ADM</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="menu-item" ng-click="vm.actionToLogout()" href="#">
+                  <i class="menu-icon ti-shift-left" title="Sair"></i>
+                  <span class="menu-title">Sair</span>
+                </a>
+              </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="hidden main-panel-overlay"></div>
+    <div class="main-panel">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button class="menu-action-open ti-menu" ng-click="vm.actionOfToggler()"></button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="ti-bell"></i>
+                                <p class="notification">5</p>
+                                <p>Notificações</p>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Notificação 1</a></li>
+                                <li><a href="#">Notificação 2</a></li>
+                                <li><a href="#">Notificação 3</a></li>
+                                <li><a href="#">Notificação 4</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="breadcrumb">
+                    <span ncy-breadcrumb-last></span>
+                </div>
+                <ui-view></ui-view>
+            </div>
+        </div>
+    </div>
+</div>

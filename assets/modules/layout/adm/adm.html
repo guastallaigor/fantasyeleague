@@ -1,0 +1,187 @@
+<style>
+    .btn-adm {
+        background-color: #FFFFFF;
+    }
+
+    .group-btn-adm {
+        padding: 40px 20px;
+        text-align: right;
+    }
+
+    .imglogo {
+        height: 48px;
+        width: 50px;
+    }
+
+    .table-hover tbody tr:hover td,
+    .table-hover tbody tr:hover th {
+        background-color: #ffcc66;
+    }
+
+    .maozinha {
+        cursor: pointer;
+    }
+
+    .btn-back {
+        background-color: #68B3C8;
+        border-color: #68B3C8;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .btn-back:hover {
+        background-color: #2C87EE;
+        border-color: #2C87EE;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .btn-back-green {
+        background-color: #7AC29A;
+        border-color: #7AC29A;
+        color: #ffffff;
+    }
+
+    .btn-back-green:hover {
+        background-color: #31C460;
+        border-color: #31C460;
+        color: #ffffff;
+    }
+
+    @media screen and (max-width: 767px) {
+        .group-btn-adm {
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+<div class="row">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 group-btn-adm">
+              <a ui-sref="layout.adm-faq" class="btn btn-adm btn-back">FAQ</a>
+              <a ui-sref="layout.adm-suporte" class="btn btn-adm btn-back">Suporte</a>
+              <a ui-sref="layout.adm-controle" class="btn btn-adm btn-back">Controle</a>
+              <a ui-sref="layout.adm-premium" class="btn btn-adm btn-back">Premium</a>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="card">
+                  <div class="header">
+                      <h4 class="title"><b>Mensagens pendentes do suporte</b></h4>
+                  </div>
+                  <div class="content table-responsive table-full-width">
+                      <div id="suporte" class="ng-hide">
+                          <table class="table table-hover maozinha">
+                              <thead>
+                                  <tr>
+                                      <th class="text-center">
+                                          <b>Usuário</b>
+                                      </th>
+
+                                      <th class="text-center">
+                                          <b>E-mail</b>
+                                      </th>
+
+                                      <th class="text-center">
+                                          <b>Categoria</b>
+                                      </th>
+
+                                      <th class="text-center">
+                                          <b>Mensagem</b>
+                                      </th>
+                                  </tr>
+                              </thead>
+
+                              <tbody>
+                                  <tr class="maozinha" ng-repeat="sup in vm.suporte" ui-sref="layout.adm-detalhes({id: la.id})">
+                                      <td class="text-center">
+                                          <img class="imglogo" ng-src="{{sup.usuario}}">
+                                      </td>
+
+                                      <td class="text-center">
+                                          {{sup.email}}
+                                      </td>
+
+                                      <td class="text-center">
+                                          {{sup.categoria}}
+                                      </td>
+
+                                      <td class="text-center">
+                                          {{sup.mensagem}}
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title"><b>Mensagens pendentes do contato</b></h4>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <div id="contato">
+                            <table class="table table-hover maozinha">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            <b>Nome</b>
+                                        </th>
+
+                                        <th class="text-center">
+                                            <b>E-mail</b>
+                                        </th>
+
+                                        <th class="text-center">
+                                            <b>Assunto</b>
+                                        </th>
+
+                                        <th class="text-center">
+                                            <b>Mensagem</b>
+                                        </th>
+
+                                        <th class="text-center">
+                                            <b>Resolver</b>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr class="maozinha" ng-repeat="cont in vm.contatos">
+                                        <td class="text-center">
+                                            {{cont.nome}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{cont.email}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{cont.assunto}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{cont.mensagem}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            <button class="btn btn-back-green" ng-click="vm.resolverContato(cont)"><i class="ti-check"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

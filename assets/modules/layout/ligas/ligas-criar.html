@@ -1,0 +1,132 @@
+<style>
+    .criar-liga {
+        padding: 10px;
+    }
+
+    .criar-liga input {
+        border: 1px solid #e4ded2;
+    }
+
+    #quem-participa select {
+        overflow: hidden;
+    }
+
+    .btn-criar-liga {
+        font-size: 18px;
+        width: 100%;
+    }
+
+    .radioQuemParticipa {
+        color: #1a1a1a;
+    }
+
+    .fsize19 {
+        font-size: 19px;
+    }
+
+    .p0ml17 {
+        padding: 0px;
+        margin: 0px 0px 0px 17px;
+    }
+
+    .imglogo {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+    }
+
+    .btn-voltar {
+        background-color: #68B3C8;
+        border-color: #68B3C8;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .btn-voltar:hover {
+        background-color: #2C87EE;
+        border-color: #2C87EE;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .inserirlogo {
+        border-color: #337ab7;
+        background-color: #337ab7;
+        color: #ffffff;
+    }
+
+    .inserirlogo:hover {
+        border-color: #68B3C8;
+        background-color: #68B3C8;
+        color: #ffffff;
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button class="btn btn-voltar" ng-click="vm.voltar()">Voltar para Ligas</button>
+    </div>
+</div>
+
+<div class="row" style="margin-bottom: 100px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <form name="detalhes">
+                    <div class="card card-criar-liga">
+                        <div class="header">
+                            <h4 class="title"><b>Detalhes da liga</b></h4>
+                        </div>
+                        <div class="content ">
+                            <div class="criar-liga">
+                                <p>Qual o nome da liga?</p>
+                                <input type="text" tabindex="1" ng-model="vm.liga.liga" class="form-control" placeholder="Nome da liga" required>
+                            </div>
+                            <div class="form-group">
+                                <span class="alert alert-danger" ng-show="editarPerfil.nome.$error.required">Nome deve ser preenchido!</span>
+                            </div>
+                            <div class="criar-liga">
+                                <p>Conte mais sobre a liga:</p>
+                                <input type="text" tabindex="2" ng-model="vm.liga.descricao" class="form-control" placeholder="Descrição" required>
+                            </div>
+                            <div class="form-group">
+                                <span class="alert alert-danger" ng-show="detalhes.descricao.$error.required">Descrição deve ser preenchida!</span>
+                            </div>
+                            <div class="criar-liga">
+                                <div ng-bind=""></div>
+                                <p>Quem participa?</p>
+                                <div class="radio radioQuemParticipa p0ml17">
+                                    <input type="radio" tabindex="3" class="icons" value="1" name="quemparticipa" id="publica" ng-model="vm.liga.tipo" selected><label style="font-size:19px">Pública</label>
+                                </div>
+                                <div class="radio radioQuemParticipa p0ml17">
+                                    <input type="radio" tabindex="4" class="icons" value="2" name="quemparticipa" id="privada" ng-model="vm.liga.tipo"><label style="font-size:19px">Privada</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div
+                                class="btn btn-upload btn-voltar"
+                                upload-button
+                                url="http://595582eb2374e400111e47f7.mockapi.io/fantel/ligas/imagens"
+                                param="file"
+                                data="formData"
+                                accept="{{acceptTypes}}"
+                                multiple="{{allowMultiple}}"
+                                force-iframe-upload="{{forceIframeUpload}}"
+                                required="true"
+                                on-upload="onUpload(files)"
+                                on-success="onSuccess(response)"
+                                on-error="onError(response)"
+                                on-complete="onComplete(response)">Inserir logo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" tabindex="6" class="btn btn-voltar btn-criar-liga" ng-disabled="detalhes.$invalid" ng-click="vm.criarLiga(vm.liga)">CRIAR</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

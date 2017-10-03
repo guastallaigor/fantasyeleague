@@ -1,0 +1,10 @@
+<div ng-controller="FaqController as vm">
+  <h2 class="text-center">FAQ</h2>
+
+  <ul class="jumbotron">
+    <li ng-repeat="faq in vm.buscarFaq">
+      <h3>{{ faq.pergunta }}</h3>
+      <p>{{ faq.resposta }}</p>
+    </li>
+  </ul>
+</div>

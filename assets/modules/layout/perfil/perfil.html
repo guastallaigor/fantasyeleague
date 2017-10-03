@@ -1,0 +1,372 @@
+<style>
+    .imginsig {
+        position: relative;
+        float: none;
+        width: 120px;
+        height: 120px;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .table-hover tbody tr:hover td,
+    .table-hover tbody tr:hover th {
+        background-color: #ffcc66;
+    }
+    
+    .maozinha {
+        cursor: pointer;
+    }
+    
+    .card .avatar {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+    }
+    
+    .btn-back {
+        background-color: #68B3C8;
+        border-color: #68B3C8;
+        color: #ffffff;
+    }
+    
+    .btn-back:hover {
+        background-color: #2C87EE;
+        border-color: #2C87EE;
+        color: #ffffff;
+    }
+    
+    .btn-back-green {
+        background-color: #7AC29A;
+        border-color: #7AC29A;
+        color: #ffffff;
+    }
+    
+    .btn-back-green:hover {
+        background-color: #31C460;
+        border-color: #31C460;
+        color: #ffffff;
+    }
+    
+    .danger {
+        border-color: #d43f3a;
+        background-color: #d43f3a;
+        color: #ffffff;
+    }
+    
+    .danger:hover {
+        border-color: #FF9480;
+        background-color: #FF9480;
+        color: #ffffff;
+    }
+    
+    .sair {
+        border-color: #337ab7;
+        background-color: #337ab7;
+        color: #ffffff;
+    }
+    
+    .sair:hover {
+        border-color: #68B3C8;
+        background-color: #68B3C8;
+        color: #ffffff;
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card card-user">
+            <div class="image">
+                <img src="assets/images/background.jpeg" alt="..." />
+            </div>
+            <div class="content">
+                <div class="author">
+                    <div>
+                        <img class="avatar border-white" ng-src="assets/images/fotos/face-0.jpg" ng-click="vm.uploadImagem()" style="width:100px;height:100px;" alt="..." />
+                        <input type="file" ng-show="false" id="uploadFile" ng-file-select="onFileSelect($files)">
+                        <h4 class="title">{{vm.perfil.nome}}<br/>
+                            <a href="#">
+                                <small style="text-transform: lowercase">@{{vm.perfil.nome}}</small>
+                            </a>
+                        </h4>
+                    </div>
+                    <a href class="btn btn-back" ng-click="vm.uploadImagem()">Alterar foto</a>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2" ng-repeat="insignia in vm.insignias" style="height:200px">
+                        <div class="card text-center">
+                            <img class="imginsig" ng-src="{{insignia.imagemUrl}}">
+                            <p><label>{{insignia.nome}}</label></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h5>Carteira<br/>
+                            <small>{{vm.perfil.saldo}}</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h5><b>Nível {{vm.perfil.nivel}}<br/></b>
+                            <small>{{vm.perfil.experiencia}} XP</small>
+                        </h5>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h5>Ligas<br/>
+                            <small>{{vm.ligas.length || 0}}</small>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 20px; padding: 0 20px">
+            <div class="text-center">
+                <button type="button" ng-click="vm.virarPremium()" class="btn btn-back-green btn-block">VIRAR PREMIUM</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="card" name="timePerfil">
+            <div class="header">
+                <h4 class="title" style="display: inline-block; padding: 7px">Equipe:
+                    <span style="margin-bottom:20px">
+                        <b>{{vm.buscarTime.nome}}</b>
+                    </span>
+                    <p ng-show="vm.existe(vm.buscarTime.nome)" class="category">Você ainda não faz parte de nenhuma equipe</p>
+                </h4>
+                <div ng-show="vm.existe(vm.buscarTime.nome)" class="row ng-hide">
+                    <div class="content">
+                        <table class="table table-striped table-hover maozinha">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <button type="button" ui-sref="layout.equipeamadorabuscar" class="btn sair btn-block"><i class="ti-search"></i> Procurar Equipe</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="button" ui-sref="layout.equipeamadoracriar" class="btn danger btn-block"><i class="ti-plus"></i> Criar Equipe</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div ng-show="!vm.existe(vm.buscarTime.nome)" class="ng-hide" style="display: inline-block;float:right">
+                    <div class="text-center">
+                        <button type="button" ui-sref="layout.equipeamadora" class="btn btn-back-green btn-xs">DETALHES</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <div ng-show="!vm.existe(vm.buscarTime.nome)" class="content ng-hide">
+                    <table class="table table-striped table-hover maozinha">
+                        <thead>
+                            <tr>
+                                <th class="text-center"></th>
+                                <th class="text-center">
+                                    <b>Usuário</b>
+                                </th>
+                                <th class="text-center">
+                                    <b>Nível</b>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="time in vm.buscarTime.membros track by time.id" ui-sref="layout.perfil-usuario">
+                                <td class="text-center">
+                                    <div class="avatar text-center">
+                                        <img ng-src="{{ time.imagem }}" alt="{{ time.nome }}" class="img-circle img-no-padding img-responsive">
+                                    </div>
+                                </td>
+
+                                <td class="text-center">
+                                    {{ time.nome }}
+                                </td>
+
+                                <td class="text-center">
+                                    {{ time.level }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Histórico</h4>
+                <p class="category">Resultados em todas as participações</p>
+            </div>
+            <div class="content table-responsive">
+                <div id="historico" ng-show="!vm.existe(vm.buscarHistorico.liga)" class="ng-hide">
+                    <table class="table table-striped table-hover maozinha">
+                        <thead>
+                            <th></th>
+                            <th class="text-center"><b>Liga</b></th>
+                            <th class="text-center"><b>Posição</b></th>
+                            <th class="text-center"><b>Pontos</b></th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="h in vm.buscarHistorico">
+                                <td class="text-center">
+                                    <div class="avatar text-center">
+                                        <img ng-src="{{h.imagem}}" alt="" class="img-circle img-no-padding img-responsive">
+                                    </div>
+                                </td>
+
+                                <td class="text-center">{{h.liga}}</td>
+                                <td class="text-center">{{h.posicao}}</td>
+                                <td class="text-center">{{h.pontuacao}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-show="vm.existe(vm.buscarHistorico.liga)" class="ng-hide">
+                    <p class="text-center alert-warning">Não há histórico</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Serviços</h4>
+                <p class="category">Recursos pagos ou inclusos em contas premium</p>
+            </div>
+
+            <div class="content table-responsive">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr ng-repeat="recursos in vm.recursosPremium track by recursos.id">
+                            <td>
+                                {{recursos.nome}}
+                            </td>
+                            <td>
+                                R${{recursos.valor}}
+                            </td>
+                            <td class="text-center">
+                                <button type="button" ng-click="vm.solicitarServico(recursos.id)" class="btn btn-back btn-sm">Solicitar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <hr>
+        <div class="card">
+            <form name="editarPerfil">
+                <div class="header">
+                    <h4 class="title">Editar o perfil</h4>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Usuário</label>
+                                <input type="text" class="form-control border-input" disabled placeholder="Nome de usuário" ng-model="vm.perfil.username">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" class="form-control border-input" name="nome" placeholder="Nome" ng-model="vm.perfil.nome" required>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="alert alert-danger" ng-show="editarPerfil.nome.$error.required">Nome deve ser preenchido!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" class="form-control border-input" id="email" name="email" placeholder="E-mail" ng-model="vm.perfil.email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="alert alert-danger" ng-show="editarPerfil.email.$error.required">E-mail deve ser preenchido!</span>
+                                <span class="alert alert-danger" ng-show="editarPerfil.$error.email">E-mail inválido!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nascimento">Data de nascimento</label>
+                                <input type="date" class="form-control border-input" id="nascimento" name="nascimento" ng-model="vm.perfil.nascimento" required>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="alert alert-danger" ng-show="editarPerfil.nascimento.$error.required">Data de nascimento deve ser preenchida!</span>
+                                <span class="alert alert-danger" ng-show="editarPerfil.nascimento.$error.date">Data de nascimento inválida!</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sexo">Sexo</label>
+                                <select required class="form-control border-input" id="sexo" name="sexo" ng-model="vm.perfil.sexo">
+                  <option value="" ng-model="vm.perfil.sexo">Selecionar</option>
+                  <option value="Masculino" ng-model="vm.perfil.sexo" ng-selected="vm.perfil.sexo == 'masculino'">Masculino</option>
+                  <option value="Feminino" ng-model="vm.perfil.sexo" ng-selected="vm.perfil.sexo == 'feminino'">Feminino</option>
+                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Senha</label>
+                                <input type="password" placeholder="Senha" class="form-control border-input" ng-model="vm.password">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nova senha</label>
+                                <input type="password" placeholder="Nova senha" class="form-control border-input" ng-model="vm.novasenha">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="button" ng-click="vm.editar()" ng-disabled="editarPerfil.$invalid" class="btn btn-back btn-lg">Salvar</button>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 20px; padding: 0 20px">
+        <div class="text-center">
+            <button type="button" ng-click="vm.desativarConta()" class="btn btn-danger btn-block">DESATIVAR CONTA</button>
+        </div>
+    </div>
+</div>

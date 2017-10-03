@@ -1,0 +1,39 @@
+<style>
+  .btn-voltar {
+    background-color: #68B3C8;
+    border-color: #68B3C8;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .btn-voltar:hover {
+    background-color: #2C87EE;
+    border-color: #2C87EE;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+</style>
+
+<section style="padding-top: 60px">
+  <div class="background-escuro">
+    <div class="text-center">
+      <h2>Recuperar Senha</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
+        <form name="cadastroForm">
+          <div class="form-group">
+            <label>Digite seu e-mail</label>
+            <input type="email" name="email" class="form-control" ng-model="vm.pessoa.email" required>
+            <span class="form-control alert-danger text-center" ng-if="cadastroForm.$error.email">E-mail inválido!</span>
+          </div>
+
+          <div class="text-center" style="margin-top: 10px">
+            <button type="submit" class="btn btn-voltar" ng-click="vm.recuperarSenha(vm.pessoa)" ng-disabled="cadastroForm.$invalid">Enviar e-mail</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

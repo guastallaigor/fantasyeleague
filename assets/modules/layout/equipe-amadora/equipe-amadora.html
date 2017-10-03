@@ -1,0 +1,202 @@
+<style>
+    .mh0 {
+        min-height: 0px;
+    }
+
+    .pr0fs17 {
+        font-size: 25px;
+        margin-left: 15px;
+        padding: 10xpx;
+    }
+
+    .b0 {
+        border: none;
+    }
+
+    .pl0fs17 {
+        padding-left: 0px;
+        font-size: 17px;
+    }
+
+    .w20h18 {
+        width: 20px;
+        height: 18px;
+    }
+
+    .w130h130 {
+        width: 130px;
+        height: 130px;
+    }
+
+    .f20 {
+        font-size: 20px;
+    }
+
+    .imglogo {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+    }
+
+    .imgitem {
+        width: 50px;
+        height: 48px;
+        padding-right: 10px;
+    }
+
+    .text-bold {
+        font-weight: 800 !important;
+    }
+
+    .table-hover tbody tr:hover td,
+    .table-hover tbody tr:hover th {
+        background-color: #ffcc66;
+    }
+
+    @media screen and (max-width: 767px) {
+        .hide767 {
+            display: none;
+        }
+    }
+
+    .btn-voltar {
+        background-color: #68B3C8;
+        border-color: #68B3C8;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .btn-voltar:hover {
+        background-color: #2C87EE;
+        border-color: #2C87EE;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .danger {
+        border-color: #d43f3a;
+        background-color: #d43f3a;
+        color: #ffffff;
+    }
+
+    .danger:hover {
+        border-color: #FF9480;
+        background-color: #FF9480;
+        color: #ffffff;
+    }
+
+    .sair {
+        border-color: #337ab7;
+        background-color: #337ab7;
+        color: #ffffff;
+    }
+
+    .sair:hover {
+        border-color: #68B3C8;
+        background-color: #68B3C8;
+        color: #ffffff;
+    }
+
+    .w148 {
+        width: 148px;
+    }
+
+    .p8 {
+        padding-bottom: 8px;
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button class="btn btn-voltar" ng-click="vm.voltar()">Voltar para Perfil</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sx-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card card-user">
+            <div class="image">
+                <img src="assets/images/background.jpeg" alt="..." />
+            </div>
+            <div class="content mh0">
+                <div class="author">
+                    <img class="avatar border-white" ng-src="{{vm.mostrarEquipe.imagem}}" alt="..." />
+                    <h4 class="title">{{vm.mostrarEquipe.nome}}</h4>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <button type="button" ui-sref="layout.equipeamadoracriar" class="btn btn-block sair">Editar</button><br/>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <button type="button" ng-click="vm.sair()" class="btn btn-block danger">Sair</button><br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12 col-xs-12 col-sm-12 pr0fs17">
+                    <p>{{vm.mostrarEquipe.descricao}}</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title p8"><b>Jogadores da equipe</b></h4>
+            </div>
+
+            <div class="content table-responsive table-full-width">
+                <div>
+
+                    <table class="table table-hover maozinha">
+                        <thead>
+                            <tr>
+
+                                <th>
+                                </th>
+
+                                <th>
+                                    <b>Usuário</b>
+                                </th>
+
+                                <th class="text-center">
+                                    <b>Nível</b>
+                                </th>
+
+                                <th class="text-center"><b>Excluir</b></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="el in vm.buscarPerfis | filter:buscar" ng-show="el.ativo==1">
+                                <div>
+                                    <td>
+                                        <img class="imglogo hide767" ng-src="{{el.imagem}}" ui-sref="layout.perfil-usuario">
+                                    </td>
+
+                                    <td>
+                                        {{el.nome}}
+                                    </td>
+
+                                    <td class="text-center">
+                                        {{el.level}}
+                                    </td>
+                                </div>
+                                <td class="text-center">
+                                    <button class="btn btn-back danger" ng-click="vm.excluirJogador(el)"><i class="ti-close"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

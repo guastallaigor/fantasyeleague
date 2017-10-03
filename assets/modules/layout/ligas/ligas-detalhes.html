@@ -1,0 +1,202 @@
+<style>
+    .mh0 {
+        min-height: 0px;
+    }
+    
+    .pr0fs17 {
+        padding-right: 0px;
+        font-size: 17px;
+    }
+    
+    .b0 {
+        border: none;
+    }
+    
+    .pl0fs17 {
+        padding-left: 0px;
+        font-size: 17px;
+    }
+    
+    .w20h18 {
+        width: 20px;
+        height: 18px;
+    }
+    
+    .w130h130 {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .f20 {
+        font-size: 20px;
+    }
+    
+    .imgitem {
+        width: 50px;
+        height: 48px;
+        padding-right: 10px;
+    }
+    
+    .text-bold {
+        font-weight: 800 !important;
+    }
+    
+    @media screen and (max-width: 767px) {
+        .hide767 {
+            display: none;
+        }
+    }
+    
+    .btn-voltar {
+        background-color: #68B3C8;
+        border-color: #68B3C8;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+    
+    .btn-voltar:hover {
+        background-color: #2C87EE;
+        border-color: #2C87EE;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+    
+    .sem-resultado {
+        text-align: center;
+        padding: 40px;
+        font-size: 18px;
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button class="btn btn-voltar" ng-click="vm.voltar()">Voltar para Ligas</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sx-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card card-user">
+            <div class="image">
+                <img src="assets/images/background.jpeg" alt="..." />
+            </div>
+            <div class="content mh0">
+                <div class="author">
+                    <div class="btn-upload" upload-button url="http://595582eb2374e400111e47f7.mockapi.io/fantel/ligas/imagens" param="file" data="formData" accept="{{acceptTypes}}" multiple="{{allowMultiple}}" force-iframe-upload="{{forceIframeUpload}}" required="true"
+                        on-upload="onUpload(files)" on-success="onSuccess(response)" on-error="onError(response)" on-complete="onComplete(response)">
+                        <img class="avatar border-white" ng-src="{{vm.ligaAtual.imagem}}" alt="..." />
+                    </div>
+                    <h4 class="title">{{vm.ligaAtual.nome}}</h4>
+                </div>
+                <hr>
+                <div class="col-lg-12 col-xs-12 col-sm-12 pr0fs17">
+                    <ul class="list-group text-center">
+                        <li class="list-group-item b0">{{vm.ligaAtual.descricao}}
+                            <a ui-sref="layout.ligas-detalhes({id: vm.ligaAtual.id})"><i ng-click="vm.editarDescricao()" class="ti-pencil"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sx-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title text-bold" title="Jogadores da liga">Jogadores da Liga
+                    <a ui-sref="layout.ligas-encontrar-usuarios({id: vm.ligaAtual.id})" class="btn btn-voltar pull-right">+ Adicionar Jogadores</a>
+                </h4>
+            </div>
+
+            <div class="content">
+                <div class="sem-resultado" ng-show="!vm.existe(vm.ligaAtual.jogadores.id)">Não há jogadores</div>
+                <table class="table table-striped" ng-show="vm.existe(vm.ligaAtual.jogadores.id)">
+                    <thead>
+                        <th></th>
+                        <th></th>
+
+                        <th class="text-center">
+                            <b>Nome</b>
+                        </th>
+
+                        <th class="text-center">
+                            <b>Pontuação</b>
+                        </th>
+                        <th></th>
+                    </thead>
+
+                    <tbody>
+                        <tr class="maozinha text-center" ng-repeat="jogadores in vm.ligaAtual.jogadores | orderBy:'ranking'">
+                            <td class="text-center" ui-sref="layout.perfil-usuario({id: vm.ligaAtual.pedidos.id})">
+                                {{ jogadores.ranking }}°
+                                <span ng-class="(jogadores.rankingAnterior - jogadores.ranking) < 0 ? ' title small red' : 'title small green'"><b>{{ vm.posicoes(jogadores.rankingAnterior, jogadores.ranking) }}<b></span>
+                            </td>
+                            <td class="text-center" ui-sref="layout.perfil-usuario({id: vm.ligaAtual.pedidos.id})">
+                                <img ng-src="{{jogadores.imagemPerfil}}" alt="{{ jogadores.usuario }}" class="w130h130 hide767">
+                            </td>
+
+                            <td class="text-center f20" ui-sref="layout.perfil-usuario({id: vm.ligaAtual.pedidos.id})">
+                                {{ jogadores.usuario }}
+                            </td>
+
+                            <td class="text-center" ui-sref="layout.perfil-usuario({id: vm.ligaAtual.pedidos.id})">
+                                {{ jogadores.pontuacao }}
+                            </td>
+                            <td>
+                                <a ng-click="vm.excluirUsuario(jogadores.id, vm.ligaAtual.id)">
+                                    <i class="ti-close red"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sx-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title text-bold" title="Membros pendentes de aceitação">Membros pendentes de aceitação
+                </h4>
+            </div>
+
+            <div class="content">
+                <div class="sem-resultado" ng-show="!vm.existe(vm.ligaAtual.pedidos.id)">Não há membros pendentes de aceitação</div>
+                <table class="table table-striped" ng-show="vm.existe(vm.ligaAtual.pedidos.id)">
+                    <thead>
+                        <th></th>
+                        <th class="text-center"><b>Nome</b></th>
+                        <th class="text-center"><b>Aceitar</b></th>
+                        <th class="text-center"><b>Rejeitar</b></th>
+                    </thead>
+
+                    <tbody>
+                        <tr class="maozinha text-center" ng-repeat="pendentes in vm.ligaAtual.pedidos">
+                            <td ui-sref="layout.perfil-usuario({id: vm.ligaAtual.pedidos.id})">
+                                <img ng-src="{{pendentes.imagemPerfil}}" alt="{{ pendentes.usuario }}" class="w130h130 hide767">
+                            </td>
+
+                            <td class="f20" ui-sref="layout.perfil-usuario({id: vm.ligaAtual.pedidos.id})">
+                                {{ pendentes.usuario }}
+                            </td>
+
+                            <td>
+                                <a ng-click="vm.aceitarPedido(pendentes.id, vm.ligaAtual.id)">
+                                    <i class="ti-check green"></i>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a ng-click="vm.recusarPedido(pendentes.id, vm.ligaAtual.id)">
+                                    <i class="ti-close red"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+<style>
+  #pesquisa-ligas {
+    margin: 0;
+  }
+
+  #pesquisa-ligas input,
+  #pesquisa-ligas input::placeholder {
+    color: #212120;
+    background-color: #ffffff;
+    padding: 20px 10px;
+    box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+    border-radius: 6px;
+    line-height: 1.6;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .sem-resultado {
+    text-align: center;
+    padding: 40px;
+  }
+
+  #pesquisa {
+    margin: 0 0 40px 0;
+  }
+
+  .imglogo {
+    height: 48px;
+    width: 50px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hide767 {
+      display: none;
+    }
+  }
+
+  .table-responsive {
+    border: 0 !important;
+  }
+
+  .table-hover tbody tr:hover td,
+  .table-hover tbody tr:hover th {
+    background-color: #ffcc66;
+  }
+
+  .maozinha {
+    cursor: pointer;
+  }
+
+  .btn-back {
+    background-color: #66615B;
+    color: #ffffff;
+    width: 148px;
+  }
+
+  .btn-back2 {
+    background-color: #68B3C8;
+    color: #ffffff;
+    width: 148px;
+  }
+
+  .btn-voltar {
+    background-color: #68B3C8;
+    border-color: #68B3C8;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+</style>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <button class="btn btn-voltar" ng-click="vm.voltar()">Voltar</button>
+  </div>
+</div>
+
+<form id="pesquisa-ligas">
+  <label for="pesquisa">Buscar pelo nome do jogador</label>
+  <input id="pesquisa" type="search" class="form-control" ng-model="buscar">
+</form>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title"><b>Jogadores existentes</b></h4>
+      </div>
+      <div class="content table-responsive table-full-width">
+        <div class="sem-resultado" ng-show="vm.existe(vm.usuarios.id)">Não há resultados na busca...</div>
+        <div ng-show="!vm.existe(vm.usuarios.id)" class="ng-hide">
+          <table class="table table-hover maozinha">
+            <thead>
+              <tr>
+                <th></th>
+
+                <th class="text-center">
+                  <b>Usuário</b>
+                </th>
+
+                <th class="text-center hide767">
+                  <b>Tipo</b>
+                </th>
+
+                <th class="text-center">
+                  <b></b>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="usu in vm.usuarios | filter:buscar">
+                <td class="text-center">
+                  <img class="imglogo hide767" ng-src="{{usu.imagemPerfil}}" ui-sref="layout.perfil-usuario({id: usu.id})">
+                </td>
+
+                <td class="text-center">
+                  {{usu.usuario}}
+                </td>
+
+                <td class="text-center hide767" ng-if="usu.premium">
+                  Premium
+                </td>
+
+                <td class="text-center hide767" ng-if="!usu.premium">
+                  Free
+                </td>
+
+                <td class="text-center">
+                  <button class="btn btn-back" ng-click="vm.convidarUsuario({usu})">Convidar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

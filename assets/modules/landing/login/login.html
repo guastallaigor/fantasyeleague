@@ -1,0 +1,192 @@
+<section class="video-section" id="video">
+  <video autoplay loop muted class="bg_video">
+    <source src="http://hygorzorak.com/videos/lol.mp4" type="video/mp4"> Seu navegador não suporta o video
+  </video>
+
+  <div class="form">
+    <form class="login-form" name="formulario">
+      <div class="text-center">
+        <img src="assets/images/fantasyeleague.png" width="130" height="auto">
+      </div>
+
+      <!-- Campo sobre nome do usuário -->
+      <input type="text" ng-model="vm.usuario.username" name="usuario" tabindex="1" class="form-control mensagens_input" required
+        placeholder="Usuário" ng-maxlength="15">
+      <span ng-show="formulario.usuario.$error.required && formulario.usuario.$dirty" class="form-control alert-danger">Insira usuario</span>
+      <span ng-show="formulario.usuario.$error.maxlength && formulario.usuario.$dirty" class="form-control alert-danger">Deve ter no máximo 15 caracteres</span>
+
+      <!-- Campo sobre senha do usuário -->
+      <input type="password" ng-model="vm.usuario.password" name="senha" tabindex="2" class="form-control mensagens_input" required
+        placeholder="Senha" ng-minlength="6">
+      <span ng-show="formulario.senha.$error.required && formulario.senha.$dirty" class="form-control alert-danger">Insira senha</span>
+      <span ng-show="formulario.senha.$error.minlength && formulario.senha.$dirty" class="form-control alert-danger">Deve ter no minimo 6 caracteres</span>
+
+      <button class="mensagens_input" ng-click="vm.realizarLogin(vm.usuario.username, vm.usuario.password)" type="submit" tabindex="3"
+        ng-disabled="formulario.$invalid" style=" border-radius: 5px ; line-height: 1">Entrar</button>
+
+      <div class="login-options">
+        <a class="facebook" href="#">Facebook</a>
+        <a class="google" href="#">Google+</a>
+      </div>
+
+      <div style="padding-bottom: 30px">
+        <p class="message">Não possui conta? <a ui-sref="landing.cadastrar">Crie sua conta aqui!</a></p>
+        <p class="message"><a ui-sref="landing.recuperarSenha">Clique aqui para recuperar a senha</a></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="section hide-section">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: #FFF; color: #24292e; padding: 3% 10% 5% 10%;">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <h3 class="text-center" style="padding: 15px;font-weight: bold;">LIGAS</h3>
+      <p class="text-center tamFonte">Ao criar um time você automaticamente participará da liga nacional contra todos os usuários do Fantasy e-League.</p>
+      <p class="text-center tamFonte">Crie ligas e chame seus amigos para disputarem entre vocês.</p>
+      <p class="text-center tamFonte">Crie sua estratégia, escale seu time e se torne o mito das Ligas !</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <img src="assets/images/podio.png" class="pull-right img-responsive" style="margin-top: 8%;">
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: #24292e; padding: 3% 10% 5% 10%;">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <h3 class="text-center" style="padding: 15px;font-weight: bold;">MEU TIME</h3>
+      <p class="text-center tamFonte">Você deverá montar um time de acordo com as posições existentes no League of Legends (TOP, MID, JUNGLE, CARRY, SUP).</p>
+      <p class="text-center tamFonte">Cada jogador tem um custo de escalação que pode aumentar ou diminuir de acordo com sua pontuação na rodada.</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <img src="assets/images/telaTime.png" width="450" class="pull-right img-responsive" style="margin-top: 7%;">
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: #FFF; color: #24292e; padding: 3% 10% 5% 10%;">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <h3 class="text-center" style="padding: 15px;font-weight: bold;">VANTAGENS DE SER PREMIUM</h3>
+      <p class="text-center tamFonte">Crie ligas de até 600 usuários, aumente a sua participação em mais ligas, modifique seu nome de usuário, tenha acesso
+        ao seu histórico de ligas passadas.
+      </p>
+      <p class="text-center tamFonte">Sendo usuário PREMIUM você automaticamente será adicionado a liga premium e competirá contra outros usuários que também
+        possuam este status.
+      </p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <img src="assets/images/logoPremium.png" width="250" class="pull-right img-responsive">
+    </div>
+  </div>
+</section>
+<footer id="footer" class="footer-mobile">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color: #24292e; padding: 50px 0px;">
+    <div class="footer-links">
+      <ul class="list-inline text-center">
+        <li>
+          <a data-toggle="modal" data-target="#termosDeUsoModal" style="cursor: pointer;" class="link_rodape">Termos de Uso</a>
+        </li>
+        |
+        <li>
+          <a data-toggle="modal" data-target="#faqModal" style="cursor:pointer;" class="link_rodape">FAQ</a>
+        </li>
+        |
+        <li>
+          <a data-toggle="modal" data-target="#contatoModal" style="cursor: pointer;" class="link_rodape">Contato</a>
+        </li>
+      </ul>
+    </div>
+    <p></p>
+    <p class="text-center"><small>&copy; 2017 FANTASY E-LEAGUE.</small> <br>Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<style>
+  html {
+    background-color: #333;
+  }
+
+  @media (min-width: 500px) {
+    .bg_video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: 0;
+    }
+  }
+
+  .form {
+    padding: 15px 10px;
+    top: 10%;
+    background-color: #24292e;
+    box-shadow: 0 5px 20px 5px rgba(0, 0, 0, .05) !important;
+  }
+
+  .login-form input, #contatoModal input, #contatoModal textarea {
+      background-color: #1d1c1c!important;
+      color: #f1f1f1
+  }
+
+  .modal-footer {
+      border-top: 0
+  }
+
+  .mensagens_input {
+    margin-top: 15px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .link_rodape {
+    color: #999999;
+  }
+
+  .link_rodape:hover {
+    color: #FFFFFF;
+  }
+
+  @media (max-width: 500px) {
+    .bg_video {
+      display: none;
+    }
+    .form {
+      top: 0;
+      height: 100vh;
+      box-shadow: none;
+      padding-top: 40px;
+    }
+    .hide-section {
+      display: none;
+    }
+    .footer-links li {
+      padding: 0;
+      font-size: 0.75em;
+    }
+  }
+
+  #video {
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 5;
+    transition: none;
+    text-align: inherit;
+    line-height: 22px;
+    opacity: 1;
+    min-height: 700px;
+  }
+
+  .tamFonte {
+    font-size: 1.5em;
+  }
+
+  .video-section {
+    height: 100vh;
+  }
+
+  .footer-links {
+    padding: 20px;
+  }
+
+  .footer-links li {
+    padding: 0 20px;
+    text-transform: uppercase;
+  }
+
+</style>

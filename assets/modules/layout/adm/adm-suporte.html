@@ -1,0 +1,239 @@
+<style>
+        .mh0 {
+            min-height: 0px;
+        }
+
+        .pr0fs17 {
+            padding-right: 0px;
+            font-size: 17px;
+        }
+
+        .b0 {
+            border: none;
+        }
+
+        .pl0fs17 {
+            padding-left: 0px;
+            font-size: 17px;
+        }
+
+        .w20h18 {
+            width: 20px;
+            height: 18px;
+        }
+
+        .w130h130 {
+            width: 130px;
+            height: 130px;
+        }
+
+        .f20 {
+            font-size: 20px;
+        }
+
+        .imgitem {
+            width: 50px;
+            height: 48px;
+            padding-right: 10px;
+        }
+
+        .text-bold {
+            font-weight: 800 !important;
+        }
+
+        @media screen and (max-width: 767px) {
+            .hide767 {
+                display: none;
+            }
+        }
+
+        .btn-voltar {
+            background-color: #68B3C8;
+            border-color: #68B3C8;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .btn-voltar:hover {
+            background-color: #2C87EE;
+            border-color: #2C87EE;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .sem-resultado {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+        }
+
+        .criar-faq {
+            padding: 10px;
+        }
+
+        .criar-faq input {
+            border: 1px solid #e4ded2;
+        }
+
+        #quem-participa select {
+            overflow: hidden;
+        }
+
+        .btn-criar-faq {
+            font-size: 18px;
+            width: 100%;
+        }
+
+        .radioQuemParticipa {
+            color: #1a1a1a;
+        }
+
+        .fsize19 {
+            font-size: 19px;
+        }
+
+        .p0ml17 {
+            padding: 0px;
+            margin: 0px 0px 0px 17px;
+        }
+
+        .imglogo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .btn-voltar {
+            background-color: #68B3C8;
+            border-color: #68B3C8;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .btn-voltar:hover {
+            background-color: #2C87EE;
+            border-color: #2C87EE;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .inserirlogo {
+            border-color: #337ab7;
+            background-color: #337ab7;
+            color: #ffffff;
+        }
+
+        .inserirlogo:hover {
+            border-color: #68B3C8;
+            background-color: #68B3C8;
+            color: #ffffff;
+        }
+
+        .hh {
+            display:hidden;
+        }
+
+        .danger {
+            border-color: #d43f3a;
+            background-color: #d43f3a;
+            color: #ffffff;
+        }
+
+        .danger:hover {
+            border-color: #FF9480;
+            background-color: #FF9480;
+            color: #ffffff;
+        }
+
+        .sair {
+            border-color: #337ab7;
+            background-color: #337ab7;
+            color: #ffffff;
+        }
+
+        .sair:hover {
+            border-color: #68B3C8;
+            background-color: #68B3C8;
+            color: #ffffff;
+        }
+
+        .w148 {
+            width: 148px;
+        }
+
+        .p8 {
+            padding-bottom: 8px;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button class="btn btn-voltar" ng-click="vm.voltar()">Voltar para ADM</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form name="detalhes">
+                        <div class="card card-criar-faq">
+                            <div class="header">
+                                <h4 class="title"><b>Nova categoria - suporte</b></h4>
+                            </div>
+                            <div class="content ">
+                                <div class="criar-faq">
+                                    <p>Categoria:</p>
+                                    <input type="text" tabindex="1" ng-model="vm.suporte.categoria" name="categoria" id="categoria" class="form-control" placeholder="Categoria" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" tabindex="6" class="btn btn-voltar btn-criar-faq" ng-disabled="detalhes.$invalid" ng-click="vm.inserirCategoria(vm.suporte.categoria)">CRIAR</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title p8"><b>Manutenção de categorias - suporte</b></h4>
+                </div>
+
+                <div class="content table-responsive table-full-width">
+                    <div>
+
+                        <table class="table table-hover maozinha">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <b>Categoria</b>
+                                    </th>
+
+                                    <th class="text-center"><b>Excluir</b></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="ff in vm.categorias | filter:buscar">
+                                    <div>
+                                        <td class="text-center">
+                                            {{ff.categoria}}
+                                        </td>
+                                    </div>
+                                    <td class="text-center">
+                                        <button class="btn btn-back danger" ng-click="vm.excluirCategoria(ff.id)"><i class="ti-close"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

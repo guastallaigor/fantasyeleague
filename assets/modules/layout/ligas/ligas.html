@@ -1,0 +1,109 @@
+<style>
+  .btn-ligas {
+    background-color: #FFFFFF;
+  }
+
+  .group-btn-ligas {
+    padding: 40px 20px;
+    text-align: right;
+  }
+
+  .imglogo {
+    height: 48px;
+    width: 50px;
+  }
+
+  .table-hover tbody tr:hover td,
+  .table-hover tbody tr:hover th {
+    background-color: #ffcc66;
+  }
+
+  .maozinha {
+    cursor: pointer;
+  }
+
+  .btn-back {
+    background-color: #68B3C8;
+    border-color: #68B3C8;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .btn-back:hover {
+    background-color: #2C87EE;
+    border-color: #2C87EE;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .group-btn-ligas {
+      text-align: center;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  }
+</style>
+
+<div class="row">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 group-btn-ligas">
+        <a ui-sref="layout.ligas-buscar" class="btn btn-ligas btn-back">Buscar ligas</a>
+        <a ui-sref="layout.ligas-criar" class="btn btn-ligas btn-back">+ Criar liga</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title"><b>Suas Ligas</b></h4>
+          </div>
+          <div class="content table-responsive table-full-width">
+            <div id="ligasativas" ng-show="!vm.existe(vm.buscarLigasAtivas.liga)" class="ng-hide">
+              <table class="table table-hover maozinha">
+                <thead>
+                  <tr>
+                    <th></th>
+
+                    <th class="text-center">
+                      <b>Liga</b>
+                    </th>
+
+                    <th class="text-center">
+                      <b>Posição</b>
+                    </th>
+
+                    <th class="text-center">
+                      <b>Pontos</b>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr class="maozinha" ng-repeat="la in vm.buscarLigasAtivas" ui-sref="layout.ligas-detalhes({id: la.id})">
+                    <td class="text-center">
+                      <img class="imglogo" ng-src="{{la.imagem}}">
+                    </td>
+
+                    <td class="text-center">
+                      {{la.liga}}
+                    </td>
+
+                    <td class="text-center">
+                      {{la.posicao}}
+                    </td>
+
+                    <td class="text-center">
+                      {{la.pontuacao}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

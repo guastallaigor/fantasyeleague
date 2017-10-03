@@ -1,0 +1,193 @@
+<style>
+    #pesquisa-ligas {
+        margin: 0;
+    }
+
+    #pesquisa-ligas input,
+    #pesquisa-ligas input::placeholder {
+        color: #212120;
+        background-color: #ffffff;
+        padding: 20px 10px;
+        box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+        border-radius: 6px;
+        line-height: 1.6;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .sem-resultado {
+        text-align: center;
+        padding: 40px;
+    }
+
+    #pesquisa {
+        margin: 0 0 40px 0;
+    }
+
+    .imglogo {
+        height: 48px;
+        width: 50px;
+    }
+
+    @media screen and (max-width: 767px) {
+        .hide767 {
+            display: none;
+        }
+    }
+
+    .table-responsive {
+        border: 0!important;
+    }
+
+    .table-hover tbody tr:hover td,
+    .table-hover tbody tr:hover th {
+        background-color: #ffcc66;
+    }
+
+    .maozinha {
+        cursor: pointer;
+    }
+
+    .btn-back {
+        background-color: #68B3C8;
+        border-color: #68B3C8;
+        color: #ffffff;
+        width:130px;
+    }
+
+    .btn-back2 {
+        background-color: #68B3C8;
+        color: #ffffff;
+        width: 148px;
+    }
+
+    .btn-voltar {
+        background-color: #68B3C8;
+        border-color: #68B3C8;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .danger {
+        border-color: #d43f3a;
+        background-color: #d43f3a;
+        color: #ffffff;
+    }
+
+    .danger:hover {
+        border-color: #FF9480;
+        background-color: #FF9480;
+        color: #ffffff;
+    }
+
+    .wb1 {
+        width:100px;
+    }
+
+    .wb2 {
+        width:230px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button class="btn btn-voltar" ng-click="vm.voltar()">Voltar para ADM</button>
+    </div>
+</div>
+
+<form id="pesquisa-ligas">
+    <label for="pesquisa">Buscar pelo nome do usuário</label>
+    <input id="pesquisa" type="search" class="form-control" ng-model="buscar">
+</form>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title"><b>Usuários existentes</b></h4>
+            </div>
+            <div class="content table-responsive table-full-width">
+                <div class="sem-resultado" ng-show="!vm.existe(vm.usuarios.id)">Não há resultados na busca...</div>
+                <div ng-show="vm.existe(vm.usuarios.id)" class="ng-hide">
+                    <table class="table table-hover maozinha">
+                        <thead>
+                            <tr>
+                                <th></th>
+
+                                <th class="text-center">
+                                    <a ng-click="sortType='username'">
+                                        <b>Usuário</b>
+                                    </a>
+                                </th>
+
+                                <th class="text-center">
+                                    <a ng-click="sortType='nivel'; reverseSort = !reverseSort">
+                                        <b>Nivel</b>
+                                    </a>
+                                </th>
+
+                                <th class="text-center hide767">
+                                    <a ng-click="sortType='tipo'; reverseSort = !reverseSort">
+                                        <b>Tipo</b>
+                                    </a>
+                                </th>
+
+                                <th class="text-center">
+                                    <a ng-click="sortType='banido'; reverseSort = !reverseSort">
+                                        <b>Banir/Desbanir</b>
+                                    </a>
+                                </th>
+
+                                <th class="text-center">
+                                    <a ng-click="sortType='funcao'; reverseSort = !reverseSort">
+                                        <b>Promover/Rebaixar</b>
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="usu in vm.usuarios | orderBy:sortType:reverseSort | filter:buscar">
+                                <td class="text-center">
+                                    <img class="imglogo hide767" ng-src="{{usu.imagem}}" ui-sref="layout.perfil-usuario({id: usu.id})">
+                                </td>
+
+                                <td class="text-center">
+                                    {{usu.username}}
+                                </td>
+
+                                <td class="text-center">
+                                    {{usu.nivel}}
+                                </td>
+
+                                <td class="text-center hide767" ng-if="usu.premium">
+                                    Premium
+                                </td>
+
+                                <td class="text-center hide767" ng-if="!usu.premium">
+                                    Free
+                                </td>
+
+                                <td class="text-center" ng-show="!usu.banido">
+                                    <button class="btn danger wb1" ng-click="vm.banirDesbanirUsuario(usu)">Banir</button>
+                                </td>
+
+                                <td class="text-center" ng-show="usu.banido">
+                                    <button class="btn btn-back wb1" ng-click="vm.banirDesbanirUsuario(usu)">Desbanir</button>
+                                </td>
+
+                                <td class="text-center" ng-show="usu.funcao === 'usuario'">
+                                    <button class="btn btn-back wb2" ng-click="vm.promoverRebaixarUsuario(usu)">Promover para administrador</button>
+                                </td>
+
+                                <td class="text-center" ng-show="usu.funcao === 'adm'">
+                                    <button class="btn danger wb2" ng-click="vm.promoverRebaixarUsuario(usu)">Rebaixar para usuário</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
